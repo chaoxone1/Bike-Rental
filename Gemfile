@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+gem "devise"
 
 ruby "3.1.2"
 
