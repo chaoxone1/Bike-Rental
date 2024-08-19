@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 gem "devise"
+gem "cloudinary"
 
 ruby "3.1.2"
 
