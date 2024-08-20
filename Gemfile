@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 gem "devise"
-
+gem 'faker'
 ruby "3.1.2"
+gem 'cloudinary'
+gem 'activestorage', require: 'active_storage/engine'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"

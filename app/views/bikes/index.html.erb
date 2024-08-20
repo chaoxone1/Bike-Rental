@@ -1,0 +1,12 @@
+<% @bikes.each do |bike| %>
+  <% if bike.photos.attached? %>
+    <% bike.photos.each do |photo| %>
+      <%= image_tag photo, alt: "Bike Photo", width: "300" %>
+    <% end %>
+  <% else %>
+    <%= image_tag "https://via.placeholder.com/300x200.png?text=No+Image+Available", alt: "No Image", width: "300" %>
+  <% end %>
+<% end %>
+
+
+
