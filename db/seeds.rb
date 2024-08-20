@@ -1,14 +1,5 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
 require 'faker'
+require 'open-uri'
 
 # Clear existing data
 Booking.destroy_all
@@ -25,15 +16,29 @@ users = []
   )
 end
 
+# Placeholder image URLs
+placeholder_images = [
+  "https://via.placeholder.com/300x200.png?text=Bike+1",
+  "https://via.placeholder.com/300x200.png?text=Bike+2",
+  "https://via.placeholder.com/300x200.png?text=Bike+3",
+  "https://via.placeholder.com/300x200.png?text=Bike+4",
+  "https://via.placeholder.com/300x200.png?text=Bike+5"
+]
+
 # Create Bikes
-bikes = []
 6.times do |i|
-  bikes << Bike.create!(
+  bike = Bike.create!(
     price: rand(50..150),
     description: Faker::Lorem.sentence(word_count: 10),
     location: Faker::Address.city,
     user: users[i % 3] # Assign bikes to users in a round-robin fashion
   )
+
+  # Attach random images to each bike
+  3.times do
+    file = URI.open(placeholder_images.sample)
+    bike.photos.attach(io: file, filename: "bike#{i}.png", content_type: 'image/png')
+  end
 end
 
 # Create Bookings
@@ -43,7 +48,7 @@ end
 
   Booking.create!(
     user: users.sample,
-    bike: bikes.sample,
+    bike: Bike.all.sample,
     start_date: start_date,
     end_date: end_date,
     status: ['pending', 'confirmed', 'canceled'].sample
