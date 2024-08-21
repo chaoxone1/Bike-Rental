@@ -1,25 +1,88 @@
-.navbar-lewagon {
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
   justify-content: space-between;
-  background: #CA3C25;
+  align-items: center;
+  background-color: #2c2c2c;
+  padding: 10px 20px;
+  color: #f5a623;
+  height: 90px;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-left {
+  flex: 1;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.brand-name {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.nav-item {
-  &:hover{
-    background-color: #D64045;
-    font-size: larger;
-    transition: background-color 0.3s ease;
-    border-radius: 20px;
-  }
+.navbar-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
 }
 
-.nav-link {
-  color: white;
+.navbar-center a {
+  color: #f5a623;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar-center a:hover {
+  color: #fff;
+}
+
+.btn-menu:hover {
+  background-color: #FFA500; /* Orange background */
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-signup {
+  color: #f5a623;
+  text-decoration: none;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-signup:hover {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.fa-bicycle {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.login-signup {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.navbar-left i {
+  font-size: 35px;
+}
+
+.navbar-right i {
+  font-size: 24px; /* Adjust size as needed */
 }

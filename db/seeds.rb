@@ -48,7 +48,6 @@ placeholder_images = [
   "https://upload.wikimedia.org/wikipedia/commons/a/a7/Ordinary_bicycle01.jpg",
   "https://upload.wikimedia.org/wikipedia/commons/5/5c/Ant%C3%B4nio%2C_Lu%C3%ADs_and_Pedro.jpg",
   "https://upload.wikimedia.org/wikipedia/commons/8/8d/Draisine_or_Laufmaschine%2C_around_1820._Archetype_of_the_Bicycle._Pic_01.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/9/9a/Firefighter_bicycle.jpg"
 ]
 
 placeholder_addresses = [
