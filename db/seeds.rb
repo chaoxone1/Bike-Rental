@@ -1,5 +1,31 @@
 require 'faker'
 require 'open-uri'
+require 'json'
+require 'net/http'
+require 'cgi'
+
+# Load environment variables
+MAPBOX_API_KEY = ENV['MAPBOX_API_KEY']
+
+# Method to geocode an address using Mapbox
+def geocode_address(address)
+  # Use CGI.escape to properly encode the address
+  encoded_address = CGI.escape(address)
+  url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{encoded_address}.json?access_token=#{MAPBOX_API_KEY}"
+  uri = URI(url)
+  response = Net::HTTP.get(uri)
+
+  begin
+    parsed_response = JSON.parse(response)
+    puts "Mapbox API response for address '#{address}':"
+    puts JSON.pretty_generate(parsed_response) # Print the response in a pretty format
+    parsed_response
+  rescue JSON::ParserError => e
+    puts "Failed to parse JSON response for address '#{address}': #{e.message}"
+    puts "Raw response: #{response}"
+    nil
+  end
+end
 
 # Clear existing data
 Booking.destroy_all
@@ -18,19 +44,32 @@ end
 
 # Placeholder image URLs
 placeholder_images = [
-  "https://via.placeholder.com/300x200.png?text=Bike+1",
-  "https://via.placeholder.com/300x200.png?text=Bike+2",
-  "https://via.placeholder.com/300x200.png?text=Bike+3",
-  "https://via.placeholder.com/300x200.png?text=Bike+4",
-  "https://via.placeholder.com/300x200.png?text=Bike+5"
+  "https://upload.wikimedia.org/wikipedia/commons/4/41/Left_side_of_Flying_Pigeon.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/a/a7/Ordinary_bicycle01.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/5/5c/Ant%C3%B4nio%2C_Lu%C3%ADs_and_Pedro.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/8/8d/Draisine_or_Laufmaschine%2C_around_1820._Archetype_of_the_Bicycle._Pic_01.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/9/9a/Firefighter_bicycle.jpg"
+]
+
+placeholder_addresses = [
+  "Pariser Platz, Berlin",
+  "Marienplatz 1, München",
+  "Domkloster 4, Köln",
+  "Schlosshof 1, Heidelberg",
+  "Platz der Deutschen Einheit 1, Hamburg"
 ]
 
 # Create Bikes
 6.times do |i|
+  address = placeholder_addresses.sample
+
+  # Call the geocoding method and log the response
+  geocode_response = geocode_address(address)
+
   bike = Bike.create!(
     price: rand(50..150),
     description: Faker::Lorem.sentence(word_count: 10),
-    address: Faker::Address.city, # Use Faker to generate a random city name
+    address: address, # Assign the address
     user: users[i % 3] # Assign bikes to users in a round-robin fashion
   )
 
