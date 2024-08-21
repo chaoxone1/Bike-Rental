@@ -1,20 +1,13 @@
 .card-show-bike {
   overflow: hidden;
-  background: white;
+  background: black;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  height: 500px;
 }
 
-.card-show-bike > img {
-  height: 400px;
-  width: 100%;
-  object-fit: cover;
+.carousel-item img {
+  height: 500px;
 }
-
-// .card-show-bike-infos h2 {
-//   font-size: 20px;
-//   font-weight: bold;
-//   margin: 0;
-// }
 
 .card-show-bike-infos-text {
   margin-top: 10px;
