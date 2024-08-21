@@ -30,7 +30,7 @@ placeholder_images = [
   bike = Bike.create!(
     price: rand(50..150),
     description: Faker::Lorem.sentence(word_count: 10),
-    location: Faker::Address.city,
+    address: Faker::Address.city, # Use Faker to generate a random city name
     user: users[i % 3] # Assign bikes to users in a round-robin fashion
   )
 
@@ -39,6 +39,8 @@ placeholder_images = [
     file = URI.open(placeholder_images.sample)
     bike.photos.attach(io: file, filename: "bike#{i}.png", content_type: 'image/png')
   end
+
+  sleep 3 # Add a 3-second delay between each bike creation
 end
 
 # Create Bookings

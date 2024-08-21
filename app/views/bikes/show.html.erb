@@ -1,0 +1,15 @@
+<div class="container">
+  <h1> Bicycle <%= @bike.id %></h1>
+  <div class="card-show-bike">
+    <img src="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+  </div>
+  <div class="card-show-bike-infos">
+    <div class="card-show-bike-infos-text">
+      <h2>That is the bike of user: <%= @bike.user.email %></h2>
+      <p><%= @bike.description %></p>
+    </div>
+    <div>
+      <a class="btn-booknow" href="#">Book now for: <%= @bike.price %>€</a>
+    </div>
+  </div>
+</div>
