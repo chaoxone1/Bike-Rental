@@ -1,0 +1,8 @@
+<h1>Welcome, <%= @user.email %></h1>
+
+<h2>Your Bikes:</h2>
+<ul>
+  <% @bikes.each do |bike| %>
+    <li><%= bike.name %></li>
+  <% end %>
+</ul>
