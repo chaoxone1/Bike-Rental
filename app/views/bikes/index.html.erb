@@ -1,12 +1,16 @@
-<% @bikes.each do |bike| %>
-  <% if bike.photos.attached? %>
-    <% bike.photos.each do |photo| %>
-      <%= image_tag photo, alt: "Bike Photo", width: "300" %>
-    <% end %>
-  <% else %>
-    <%= image_tag "https://via.placeholder.com/300x200.png?text=No+Image+Available", alt: "No Image", width: "300" %>
+<div class="card-deck">
+  <% @bikes.each do |bike| %>
+    <div class="card">
+      <%= image_tag bike.photos.first %>
+      <div class="card-body">
+        <p class="card-text"><%= bike.description %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Preis pro Tag: <%= number_to_currency(bike.price) %></li>
+        </ul>
+        <div class="card-footer">
+          <%= link_to 'Details', bike_path(bike), class: 'btn btn-primary w-100' %>
+        </div>
+      </div>
+    </div>
   <% end %>
-<% end %>
-
-
-
+</div>
