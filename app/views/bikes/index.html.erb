@@ -1,4 +1,8 @@
-<div class="container mt-4">
+
+<div class="card-deck">
+  <% @bikes.each do |bike| %>
+    <div class="card">
+      <div class="container mt-4">
   <div class="row">
     <% @bikes.each do |bike| %>
       <div class="col-md-4 mb-4">
@@ -33,6 +37,18 @@
       </div>
     <% end %>
       </div>
+      <div class="card-body">
+        <p class="card-text"><%= bike.description %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Preis pro Tag: <%= number_to_currency(bike.price) %></li>
+        </ul>
+        <div class="card-footer">
+          <%= link_to 'Details', bike_path(bike), class: 'btn btn-primary w-100' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <div style="width: 100%; height: 600px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"

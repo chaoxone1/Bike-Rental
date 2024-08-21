@@ -1,0 +1,84 @@
+// Grundlegendes Styling für die Card-Container
+.card-deck {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 20px 0;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+// Styling für jede einzelne Card
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px; // Fügt einen Abstand zwischen den Cards hinzu
+  width: 100px; // Verkleinert die Breite der Cards
+  flex: 1 1 auto; // Cards passen sich flexibel dem verfügbaren Platz an
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%; // Karten nehmen 100% des verfügbaren Platzes auf Mobilgeräten ein
+  }
+
+  .card-img-top {
+    border-radius: 8px 8px 0 0;
+    height: 150px; // Verkleinert die Höhe des Bildes
+    object-fit: cover; // Bild wird skaliert, um den Raum auszufüllen, ohne das Seitenverhältnis zu verzerren
+  }
+
+  .card-body {
+    padding: 10px;
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: #555;
+      white-space: nowrap; /* Prevents text from wrapping to the next line */
+      overflow: hidden; /* Hides overflowed content */
+      text-overflow: ellipsis;
+    }
+  }
+
+  .list-group-item {
+    border: none;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #f8f9fa;
+
+    &:nth-child(odd) {
+      background-color: #e9ecef; // Abwechselnde Hintergrundfarben für bessere Lesbarkeit
+    }
+  }
+
+  .card-footer {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
