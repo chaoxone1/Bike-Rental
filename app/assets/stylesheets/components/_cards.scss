@@ -18,6 +18,7 @@
   margin: 10px; // Fügt einen Abstand zwischen den Cards hinzu
   width: 100px; // Verkleinert die Breite der Cards
   flex: 1 1 auto; // Cards passen sich flexibel dem verfügbaren Platz an
+  width: 250px;
 
   @media (max-width: 768px) {
     flex: 1 1 100%; // Karten nehmen 100% des verfügbaren Platzes auf Mobilgeräten ein
