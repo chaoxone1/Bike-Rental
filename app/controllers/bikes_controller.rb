@@ -5,7 +5,6 @@ class BikesController < ApplicationController
     @bikes = Bike.joins(:bookings)
                   .where(bookings: { status: 'new' })
                   .distinct
-                  .geocoded
 
     @markers = @bikes.map do |bike|
       {
@@ -88,6 +87,6 @@ class BikesController < ApplicationController
   end
 
   def bike_params
-    params.require(:bike).permit(:price, :description, :address, :user_id, :index_bikes_on_user_id, photos: [])
+    params.require(:bike).permit(:price, :description, :user_id, :index_bikes_on_user_id, photos: [])
   end
 end

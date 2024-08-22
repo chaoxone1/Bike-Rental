@@ -1,7 +1,6 @@
 class Bike < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
-  scope :geocoded, -> { where.not(latitude: nil, longitude: nil) }
   has_many_attached :photos
   after_create :create_initial_booking
 

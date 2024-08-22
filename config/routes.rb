@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :bikes do
     post 'book', on: :member
   end
+  patch 'dashboard/accept_booking/:id', to: 'dashboard#accept_booking', as: 'accept_booking_dashboard'
+  patch 'dashboard/decline_booking/:id', to: 'dashboard#decline_booking', as: 'decline_booking_dashboard'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
