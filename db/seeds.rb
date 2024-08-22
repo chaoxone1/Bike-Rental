@@ -91,7 +91,7 @@ end
     bike: Bike.all.sample,
     start_date: start_date,
     end_date: end_date,
-    status: ['pending', 'confirmed', 'canceled'].sample
+    status: ['pending', 'booked', 'new'].sample
   )
 end
 
