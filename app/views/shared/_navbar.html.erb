@@ -6,12 +6,18 @@
         <div class="navbar-center">
             <%# <a href="" class="btn-menu">Home</a> %>
             <%= link_to "Home", root_path, class: "btn-menu" %>
-            <a class="btn-menu" href="#">Create offer</a>
-            <a class="btn-menu" href="#">My Bookings</a>
-            <a class="btn-menu" href="#">My offer</a>
+            <%= link_to "Create offer", new_bike_path, class: "btn-menu" %>
+            <%= link_to "Dashboard", dashboard_path, class: "btn-menu" %>
+            <%# <%= link_to "My Offers", dashboard_offer_path(current_user), class: "btn-menu" %>
         </div>
         <div class="navbar-right">
           <i class="fa-solid fa-user" style="color: #FFA500;"></i>
-            <a href="#" class="login-signup">Login/Signup</a>
+            <% if user_signed_in? %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "login-signup" %>
+            <% else %>
+              <%= form_with url: destroy_user_session_path, method: :delete do %>
+              <%= submit_tag "Logout", class: "btn-menu" %>
+              <% end %>
+            <% end %>
         </div>
     </nav>

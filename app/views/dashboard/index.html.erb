@@ -1,8 +1,32 @@
-<h1>Welcome, <%= @user.email %></h1>
+<h2>My New Bikes</h2>
+<% if @bikes_with_new_bookings.present? %>
+  <ul>
+    <% @bikes_with_new_bookings.each do |bike| %>
+      <li><%= bike.description %> - $<%= bike.price %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No bikes with new bookings.</p>
+<% end %>
 
-<h2>Your Bikes:</h2>
-<ul>
-  <% @bikes.each do |bike| %>
-    <li><%= bike.name %></li>
-  <% end %>
-</ul>
+<h2>My Pending Bookings</h2>
+<% if @pending_bookings.present? %>
+  <ul>
+    <% @pending_bookings.each do |booking| %>
+      <li>Bike ID: <%= booking.bike_id %> - Start: <%= booking.start_date %>, End: <%= booking.end_date %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pending bookings.</p>
+<% end %>
+
+<h2>My Previous Bookings</h2>
+<% if @previous_bookings.present? %>
+  <ul>
+    <% @previous_bookings.each do |booking| %>
+      <li>Bike ID: <%= booking.bike_id %> - Start: <%= booking.start_date %>, End: <%= booking.end_date %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No previous bookings.</p>
+<% end %>
