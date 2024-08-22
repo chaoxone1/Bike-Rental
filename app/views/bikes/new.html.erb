@@ -1,36 +1,43 @@
-<%= form_with(model: @bike, local: true) do |form| %>
-  <% if @bike.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
-      <ul>
-        <% @bike.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container d-flex justify-content-center">
+  <div class="col-6">
+    <div style="margin-bottom: 8rem;">
+      <h1>Create your new Bike!</h1>
     </div>
-  <% end %>
+    <%= form_with(model: @bike, local: true) do |form| %>
+      <% if @bike.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
+          <ul>
+            <% @bike.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :description %>:</p>
+        <%= form.text_area :description, class: "form-control", style: "height: 38px; width: 25rem;" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :price %>:</p>
+        <%= form.number_field :price, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: 'address-input', data: { address_autocomplete_target: "address" } %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :address %>:</p>
+        <%= form.text_field :address, id: 'address-input', data: { address_autocomplete_target: "address" }, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :photos %>
-    <%= form.file_field :photos, multiple: true, direct_upload: true %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :photos %></p>
+        <%= form.file_field :photos, multiple: true, direct_upload: true, class: "form-control" %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="actions">
+        <%= form.submit 'Save your Bike!', class: "btn w-100", style: "color: #f5a623; background-color: #2C2C2C;" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
