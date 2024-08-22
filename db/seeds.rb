@@ -82,17 +82,17 @@ placeholder_addresses = [
 end
 
 # Create Bookings
-10.times do |i|
-  start_date = Faker::Date.between(from: 2.days.ago, to: Date.today)
-  end_date = start_date + rand(1..7).days
+# 10.times do |i|
+#   start_date = Faker::Date.between(from: 2.days.ago, to: Date.today)
+#   end_date = start_date + rand(1..7).days
 
-  Booking.create!(
-    user: users.sample,
-    bike: Bike.all.sample,
-    start_date: start_date,
-    end_date: end_date,
-    status: ['pending', 'booked', 'new'].sample
-  )
-end
+#   Booking.create!(
+#     user: users.sample,
+#     bike: Bike.all.sample,
+#     start_date: start_date,
+#     end_date: end_date,
+#     status: ['pending', 'booked', 'new'].sample
+#   )
+# end
 
 puts "Seed data created successfully!"

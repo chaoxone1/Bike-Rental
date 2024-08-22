@@ -34,7 +34,13 @@
       <p><%= @bike.description %></p>
     </div>
     <div>
-      <a class="btn-booknow" href="#">Book now for: <%= @bike.price %>€</a>
+        <% if @bike.bookings.where(status: 'pending').exists? %>
+        <p>This bike has already been booked.</p>
+      <% else %>
+        <%= form_with url: book_bike_path(@bike), method: :post, local: true do %>
+          <%= submit_tag "Book now for: #{number_to_currency(@bike.price)}€", class: "btn-booknow" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
