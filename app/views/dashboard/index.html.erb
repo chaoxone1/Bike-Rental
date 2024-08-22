@@ -1,32 +1,85 @@
-<h2>My Bikes out for rent</h2>
-<% if @bikes_with_new_bookings.present? %>
-  <ul>
-    <% @bikes_with_new_bookings.each do |bike| %>
-      <li><%= bike.description %> - $<%= bike.price %></li>
-    <% end %>
-  </ul>
+<h2>Requests from others</h2>
+<% if @open_requests.present? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @open_requests.each do |bike| %>
+        <% bike.bookings.where(status: 'pending').each do |booking| %>
+          <tr>
+            <td><%= bike.description %></td>
+            <td>€ <%= bike.price %></td>
+            <td><%= bike.address %></td>
+            <td>
+              <%= button_to "Accept", accept_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-success", data: { confirm: "Are you sure you want to accept this booking?" } %>
+              <%= button_to "Decline", decline_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-danger", data: { confirm: "Are you sure you want to decline this booking?" } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>No bikes with new bookings.</p>
 <% end %>
 
-<h2>My Pending Bookings</h2>
+
+<h2>My open requests for Bikes</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Address</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
 <% if @pending_bookings.present? %>
   <ul>
     <% @pending_bookings.each do |booking| %>
-      <li>Bike ID: <%= booking.bike_id %> - Start: <%= booking.start_date %>, End: <%= booking.end_date %></li>
+        <tr>
+          <td><%= booking.bike.description %></td>
+          <td>€ <%= booking.bike.price %></td>
+          <td><%= booking.bike.address %></td>
+          <td><%= booking.status %></td>
     <% end %>
-  </ul>
 <% else %>
-  <p>No pending bookings.</p>
+  <p>No bikes with new bookings.</p>
 <% end %>
+  </tbody>
+</table>
 
-<h2>My Previous Bookings</h2>
-<% if @previous_bookings.present? %>
+
+
+<h2>My unrented Bikes</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% if @bikes_with_new_bookings.present? %>
   <ul>
-    <% @previous_bookings.each do |booking| %>
-      <li>Bike ID: <%= booking.bike_id %> - Start: <%= booking.start_date %>, End: <%= booking.end_date %></li>
+    <% @bikes_with_new_bookings.each do |bike| %>
+        <tr>
+          <td><%= bike.description %></td>
+          <td>€ <%= bike.price %></td>
+          <td><%= bike.address %></td>
     <% end %>
-  </ul>
 <% else %>
-  <p>No previous bookings.</p>
+  <p>No bikes with new bookings.</p>
 <% end %>
+  </tbody>
+</table>
