@@ -32,6 +32,7 @@
     <div class="card-show-bike-infos-text">
       <h2>This is the bike of user: <%= @bike.user.email %></h2>
       <p><%= @bike.description %></p>
+      <p>You can rent this bike for: $ <%= @bike.price %></p>
     </div>
     <div>
         <% if @bike.bookings.where(status: 'pending').exists? %>

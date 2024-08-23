@@ -1,34 +1,47 @@
-<h1>Edit Bike</h1>
-
-<%= form_with(model: @bike, local: true) do |form| %>
-  <% if @bike.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
-      <ul>
-        <% @bike.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container d-flex justify-content-center">
+  <div class="col-4">
+    <div style="margin-bottom: 2rem; text-align: center;">
+      <h1>Edit your Bike!</h1>
     </div>
-  <% end %>
+    <%= simple_form_for(@bike) do |form| %>
+      <% if @bike.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
+          <ul>
+            <% @bike.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="form-group">
+      <p class="mb-0 d-none">
+        <%= form.label :description %>
+      </p>
+        <%= form.input :description, class: "form-control", style: "height: 38px; width: 25rem;" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, step: '0.01' %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :price %></p>
+        <%= form.number_field :price, class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+      <div class="form-group">
+        <p class="mb-0">Previous Address:<%= form.text_field :address %></p>
+      <%= form.input  :address, class: "d-none", input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+      wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+      %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit 'Update Bike' %>
-    <%= link_to 'Back', bikes_path, class: 'btn btn-secondary' %>
+      <div class="form-group">
+        <p class="mb-0"><%= form.label :photos %></p>
+        <%= form.file_field :photos, multiple: true, direct_upload: true, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Update your Bike!', class: "btn w-100", style: "color: #f5a623; background-color: #2C2C2C;" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
