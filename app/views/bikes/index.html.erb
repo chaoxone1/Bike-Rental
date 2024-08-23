@@ -30,10 +30,10 @@
             <div class="card-body">
               <p class="card-text"><%= bike.description %></p>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Preis pro Tag: <%= number_to_currency(bike.price) %></li>
+                <li class="list-group-item", style="background-color: #2c2c2c; color: #f5a623; text-align: center;">Price: <%= number_to_currency(bike.price) %></li>
               </ul>
               <div class="card-footer">
-                <%= link_to 'Details', bike_path(bike), class: 'btn btn-primary w-100' %>
+                <%= link_to 'Details', bike_path(bike), class: 'btn btn-primary w-100', style: 'background-color: #2c2c2c; color: #f5a623' %>
               </div>
             </div>
           </div>
