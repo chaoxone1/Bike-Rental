@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     @bikes_with_new_bookings = current_user.bikes.joins(:bookings).where(bookings: { status: 'new' }).distinct
     @pending_bookings = current_user.bookings.where(status: 'pending')
     @open_requests = current_user.bikes.joins(:bookings).where(bookings: { status: 'pending' }).distinct
+    @bikes_history = current_user.bookings
   end
 
   def offers

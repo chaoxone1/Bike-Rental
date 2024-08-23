@@ -43,14 +43,17 @@ class BikesController < ApplicationController
     if @bike.update(bike_params)
       redirect_to @bike, notice: 'Bike was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
   def destroy
     @bike = Bike.find(params[:id])
     @bike.destroy
-    redirect_to_list_path(@bike.list)
+    respond_to do |format|
+      format.html { redirect_to dashboard_path, notice: 'Bike was successfully deleted.' }
+      format.js
+    end
   end
 
   def show
