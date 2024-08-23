@@ -1,4 +1,9 @@
-<%= image_tag bike.photos.first, height: 80, width: 80, alt: "Logo" %>
+<% if bike.photos.any? %>
+  <%= image_tag bike.photos.first, height: 80, width: 80, alt: "Logo" %>
+<% else %>
+  <p>No picture available</p>
+<% end %>
+
 <h2 style="font-size: 14px;"><%= bike.description %></h2>
 <p><%= bike.address %></p>
 <%= link_to 'Details', bike_path(bike), class: 'btn btn-primary w-100' %>
