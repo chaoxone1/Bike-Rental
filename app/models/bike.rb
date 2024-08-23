@@ -9,7 +9,7 @@ class Bike < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
   validates :description, length: { minimum: 10 }
-  validates :description, :price, presence: true
+  validates :description, :price, :address, presence: true
 
   private
 
