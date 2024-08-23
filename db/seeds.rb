@@ -24,6 +24,27 @@ user3 = User.create!(
   password_confirmation: 'password'
 )
 
+user4 = User.create!(
+  email: 'danmuller.dev.98@gmail.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+user5 = User.create!(
+  email: 'distadiomichele93@gmail.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+user6 = User.create!(
+  email: 'keno.mehic10@gmail.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+user7 = User.create!(
+  email: 'armankurtovic01@gmail.com',
+  password: 'password',
+  password_confirmation: 'password'
+)
+
 # Placeholder image URLs
 image_cube1 = "https://images.lucky-bike.de/out/pictures/master/product/1/cube-aim-race-olive-n-black-88596-01.jpg?w=3000&h=2000&q=100"
 image_cube2 = "https://images.lucky-bike.de/out/pictures/master/product/2/cube-aim-race-29-olive-n-black-88596-02.jpg?w=3000&h=2000&q=100"
@@ -31,6 +52,7 @@ image_cube3 = "https://images.lucky-bike.de/out/pictures/master/product/8/cube-a
 sushi1 = "https://sushi-bikes.com/cdn/shop/files/maki_cockpit_displayon_new.jpg?v=1722866996&width=823"
 sushi2 = "https://sushi-bikes.com/cdn/shop/files/BCN_2024_KEYVISUAL_1_c2b284b2-6e48-423c-b9b8-f38788e30c69.jpg?v=1722866996&width=823"
 sushi3 = "https://sushi-bikes.com/cdn/shop/products/rear_light_an_black.jpg?v=1722866996&width=823"
+
 klapprad1 = "https://cdn.fahrrad-xxl.de/media/pimg/813/thumbs/2648261_14353466.jpg"
 klapprad2 = "https://cdn.fahrrad-xxl.de/media/pimg/812/thumbs/2696508_14417463.jpg"
 
@@ -38,6 +60,9 @@ image1 = "https://upload.wikimedia.org/wikipedia/commons/4/41/Left_side_of_Flyin
 image2 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Ordinary_bicycle01.jpg"
 image3 = "https://upload.wikimedia.org/wikipedia/commons/5/5c/Ant%C3%B4nio%2C_Lu%C3%ADs_and_Pedro.jpg"
 image4 = "https://upload.wikimedia.org/wikipedia/commons/8/8d/Draisine_or_Laufmaschine%2C_around_1820._Archetype_of_the_Bicycle._Pic_01.jpg"
+
+electro1 = "https://www.fahrrad.de/cdn/shop/files/PHO_BIKE_PERS_REVO_RAY-22-HardRayE40-27-deepred__23SALL__23AEPI__23V1.png?v=1719475572&width=1100"
+electro2 = "https://www.fahrrad.de/cdn/shop/files/PHO_BIKE_90_RE_RAY-HardRayE40-27-deepred__23SALL__23AEPI__23V1.png?v=1719475572&width=1100"
 
 # Hardcoded addresses with their respective coordinates
 address1 = { address: "Pariser Platz, Berlin", latitude: 52.5158405, longitude: 13.3794655 }
@@ -113,8 +138,7 @@ bike6 = Bike.create!(
   longitude: address1[:longitude],
   user: user3
 )
-bike6.photos.attach(io: URI.open(image2), filename: "bike1.png", content_type: 'image/png')
-bike6.photos.attach(io: URI.open(image3), filename: "bike2.png", content_type: 'image/png')
-bike6.photos.attach(io: URI.open(image4), filename: "bike3.png", content_type: 'image/png')
+bike6.photos.attach(io: URI.open(electro1), filename: "bike1.png", content_type: 'image/png')
+bike6.photos.attach(io: URI.open(electro2), filename: "bike2.png", content_type: 'image/png')
 
 puts "Seeding completed successfully!"
