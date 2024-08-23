@@ -2,117 +2,177 @@
   <!-- Tab Navigation -->
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><button type="button" class="btn btn-primary position-relative">Requests from others
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    <%= @open_requests.count %>
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</button>
-</a>
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+        <button type="button" class="btn btn-primary position-relative">
+          Requests from others
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= @open_requests.count %>
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><button type="button" class="btn btn-primary position-relative">My open requests for Bikes<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    <%= @pending_bookings.count %>
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</button></a>
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+        <button type="button" class="btn btn-primary position-relative">
+          My open requests for Bikes
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= @pending_bookings.count %>
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><button type="button" class="btn btn-primary position-relative">My unrented Bikes<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    <%= @bikes_with_new_bookings.count %>
-    <span class="visually-hidden">open bikes</span>
-  </span>
-</button></a>
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+        <button type="button" class="btn btn-primary position-relative">
+          My unrented Bikes
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= @bikes_with_new_bookings.count %>
+            <span class="visually-hidden">open bikes</span>
+          </span>
+        </button>
+      </a>
+    </li>
+    <!-- New History Tab -->
+    <li class="nav-item">
+      <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">
+        <button type="button" class="btn btn-primary position-relative">
+          History
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= @bikes_history.count %> <!-- You need to set this variable in the controller -->
+            <span class="visually-hidden">history items</span>
+          </span>
+        </button>
+      </a>
     </li>
   </ul>
 
   <!-- Tab Content -->
   <div class="tab-content" id="myTabContent">
+    <!-- Existing tabs -->
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <h3>Requests from others: <%= @open_requests.count %></h3>
-<% if @open_requests.present? %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Address</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @open_requests.each do |bike| %>
-        <% bike.bookings.where(status: 'pending').each do |booking| %>
-          <tr>
-            <td><%= bike.description %></td>
-            <td>€ <%= bike.price %></td>
-            <td><%= bike.address %></td>
-            <td>
-              <%= button_to "Accept", accept_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-success", data: { confirm: "Are you sure you want to accept this booking?" } %>
-              <%= button_to "Decline", decline_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-danger", data: { confirm: "Are you sure you want to decline this booking?" } %>
-            </td>
-          </tr>
-        <% end %>
+      <% if @open_requests.present? %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @open_requests.each do |bike| %>
+              <% bike.bookings.where(status: 'pending').each do |booking| %>
+                <tr>
+                  <td><%= bike.description %></td>
+                  <td>€ <%= bike.price %></td>
+                  <td><%= bike.address %></td>
+                  <td>
+                    <%= button_to "Accept", accept_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-success", data: { confirm: "Are you sure you want to accept this booking?" } %>
+                    <%= button_to "Decline", decline_booking_dashboard_path(booking.id), method: :patch, class: "btn btn-danger", data: { confirm: "Are you sure you want to decline this booking?" } %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No bikes with new bookings.</p>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No bikes with new bookings.</p>
-<% end %>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <h3>My open requests for Bikes</h3>
       <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Description</th>
-      <th scope="col">Price</th>
-      <th scope="col">Address</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-
-<% if @pending_bookings.present? %>
-  <ul>
-    <% @pending_bookings.each do |booking| %>
-        <tr>
-          <td><%= booking.bike.description %></td>
-          <td>€ <%= booking.bike.price %></td>
-          <td><%= booking.bike.address %></td>
-          <td><%= booking.status %></td>
-    <% end %>
-<% else %>
-  <p>No bikes with new bookings.</p>
-<% end %>
-  </tbody>
-</table>
-    </div </div>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @pending_bookings.present? %>
+            <% @pending_bookings.each do |booking| %>
+              <tr>
+                <td><%= booking.bike.description %></td>
+                <td>€ <%= booking.bike.price %></td>
+                <td><%= booking.bike.address %></td>
+                <td><%= booking.status %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <p>No open requests.</p>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
       <h3>My unrented Bikes</h3>
       <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Description</th>
-      <th scope="col">Price</th>
-      <th scope="col">Address</th>
-    </tr>
-  </thead>
-  <tbody>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @bikes_with_new_bookings.present? %>
+            <% @bikes_with_new_bookings.each do |bike| %>
+              <tr>
+                <td><%= bike.description %></td>
+                <td>€ <%= bike.price %></td>
+                <td><%= bike.address %></td>
+                <td>
+                  <%= form_with url: bike_path(bike), method: :delete, local: true, remote: true do %>
+                    <%= submit_tag 'Delete', data: { confirm: 'Are you sure you want to delete this bike?' }, class: 'btn btn-danger' %>
+                  <% end %>
+                  <%= link_to 'Edit', edit_bike_path(bike), class: 'btn btn-warning' %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <p>No bikes available.</p>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- New History Tab Content -->
+    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+      <h3>History</h3>
+      <!-- Content for History tab goes here -->
+      <!-- Example table structure; adjust according to your needs -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Date changed</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @bikes_history.present? %>
+            <% @bikes_history.each do |item| %>
+              <tr>
 
-<% if @bikes_with_new_bookings.present? %>
-  <ul>
-    <% @bikes_with_new_bookings.each do |bike| %>
-        <tr>
-          <td><%= bike.description %></td>
-          <td>€ <%= bike.price %></td>
-          <td><%= bike.address %></td>
-    <% end %>
-<% else %>
-  <p>No bikes with new bookings.</p>
-<% end %>
-  </tbody>
-</table>
+                <td><%= item.bike.description %></td>
+                <td>€ <%= item.bike.price %></td>
+                <td><%= item.bike.description %></td>
+                <td><%= item.status %></td>
+
+              </tr>
+            <% end %>
+          <% else %>
+            <p>No history available.</p>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

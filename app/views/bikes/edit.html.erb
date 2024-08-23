@@ -1,0 +1,34 @@
+<h1>Edit Bike</h1>
+
+<%= form_with(model: @bike, local: true) do |form| %>
+  <% if @bike.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bike.errors.count, "error") %> prohibited this bike from being saved:</h2>
+      <ul>
+        <% @bike.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: '0.01' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Update Bike' %>
+    <%= link_to 'Back', bikes_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

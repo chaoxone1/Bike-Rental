@@ -37,7 +37,10 @@
         <% if @bike.bookings.where(status: 'pending').exists? %>
         <p>This bike has already been booked.</p>
         <% elsif @bike.user == current_user%>
-          <p style="color: red;">You created this offer, so you cannot book it.</p>
+          <%= form_with url: bike_path(@bike), method: :delete, local: true do %>
+            <%= submit_tag 'Delete', data: { confirm: 'Are you sure you want to delete this bike?' }, class: 'btn btn-danger' %>
+          <% end %>
+          <%= link_to 'Edit', edit_bike_path(@bike), class: 'btn btn-warning' %>
       <% else %>
         <%= form_with url: book_bike_path(@bike), method: :post, local: true do %>
           <%= submit_tag "Book now for: #{number_to_currency(@bike.price)}€", class: "btn-booknow" %>
